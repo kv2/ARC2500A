@@ -35,6 +35,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.tableView.tableFooterView = UIView()
@@ -48,6 +49,41 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         self.setupRefreshControl()
         self.startNetworkReachabilityObserver()
+        
+        guard ARWorldTrackingConfiguration.isSupported else {
+                  
+                  
+            let message = """
+                      ARKit is not available on this device. ARKit is a required device capability. Please install the app on a device which supports ARKit: iPhone 6s and 6s Plus, iPhone 7 and 7 Plus, iPhone SE, iPad Pro (9.7, 10.5 or 12.9) – both first-gen and 2nd-gen, iPad (2017), iPhone 8 and 8 Plus, iPhone X.
+                  """ // For details, see https://developer.apple.com/documentation/arkit
+                  
+            alert  = UIAlertController(title: "ARKit Error", message: message, preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                       switch action.style{
+                       case .default:
+                           print("default")
+
+                       case .cancel:
+                           print("cancel")
+
+                       case .destructive:
+                           print("destructive")
+
+                       NSLog("dismissed UIAlert")
+
+                       @unknown default:
+
+                           NSLog("fail UIAlert")
+                       }}))
+                
+            self.presentAlert(message: message)
+                  
+            return
+                  
+        }
+        
+        
+        
         
         self.retrieveData()
         
@@ -530,14 +566,14 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return color
     }
     
-    func intFromHexString(hexStr: String) -> UInt32 {
-        var hexInt: UInt32 = 0
+    func intFromHexString(hexStr: String) -> UInt64 {
+        var hexInt: UInt64 = 0
         // Create scanner
         let scanner: Scanner = Scanner(string: hexStr)
         // Tell scanner to skip the # character
         scanner.charactersToBeSkipped = CharacterSet(charactersIn: "#")
         // Scan hex value
-        scanner.scanHexInt32(&hexInt)
+        scanner.scanHexInt64(&hexInt)
         return hexInt
     }
     
