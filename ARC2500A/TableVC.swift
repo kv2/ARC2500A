@@ -54,7 +54,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                   
                   
             let message = """
-                      ARKit is not available on this device. ARKit is a required device capability. Please install the app on a device which supports ARKit: iPhone 6s and 6s Plus, iPhone 7 and 7 Plus, iPhone SE, iPad Pro (9.7, 10.5 or 12.9) – both first-gen and 2nd-gen, iPad (2017), iPhone 8 and 8 Plus, iPhone X.
+                      ARKit is not available on this device. ARKit is a required device capability. This error should not occur in production, as the app will be prevented from installing due to required device capabilities. Please install the app on a device which supports ARKit: iPhone 6s and 6s Plus, iPhone 7 and 7 Plus, iPhone SE, iPad Pro (9.7, 10.5 or 12.9) – both first-gen and 2nd-gen, iPad (2017), iPhone 8 and 8 Plus, iPhone X.
                   """ // For details, see https://developer.apple.com/documentation/arkit
                   
             alert  = UIAlertController(title: "ARKit Error", message: message, preferredStyle: .alert)
