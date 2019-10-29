@@ -82,7 +82,7 @@ class ARViewVC: UIViewController, ARSCNViewDelegate {
             let cgImage = convertCIImageToCGImage(inputImage: imageToCIImage)else { return }
         
         //4. Create An ARReference Image (Remembering Physical Width Is In Metres)
-        let arImage = ARReferenceImage(cgImage, orientation: CGImagePropertyOrientation.up, physicalWidth: 0.45)
+        let arImage = ARReferenceImage(cgImage, orientation: CGImagePropertyOrientation.up, physicalWidth: 0.0254 * student.imageSizeInInches) //0.6096)//
         
         //5. Name The Image
         arImage.name = student.name
@@ -113,9 +113,6 @@ class ARViewVC: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         labelInstructions.isHidden = false
-        
-        
-    
         
     }
     

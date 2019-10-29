@@ -158,6 +158,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         studentObject.fileID = studentDictionary["fileID"].string
                         studentObject.imagePath = studentDictionary["imagePath"].string
                         studentObject.modelPath = studentDictionary["modelPath"].string
+                        studentObject.imageSizeInInches = CGFloat(Double(studentDictionary["imageSizeInInches"].string!)!)
                         
                     } else {
                         

@@ -13,6 +13,7 @@ class DataModelStudent: NSObject {
 
     var name: String!
     var fileID: String!
+    var imageSizeInInches: CGFloat!
     var imagePath: String!
     var modelPath: String!
     
