@@ -21,7 +21,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var selectedStudent = DataModelStudent()
     let modelsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
-    var alert = UIAlertController()
+    
     let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "www.apple.com")
     
     var colorCustomBlue = UIColor()
@@ -57,6 +57,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                       ARKit is not available on this device. ARKit is a required device capability. This error should not occur in production, as the app will be prevented from installing due to required device capabilities. Please install the app on a device which supports ARKit: iPhone 6s and 6s Plus, iPhone 7 and 7 Plus, iPhone SE, iPad Pro (9.7, 10.5 or 12.9) – both first-gen and 2nd-gen, iPad (2017), iPhone 8 and 8 Plus, iPhone X.
                   """ // For details, see https://developer.apple.com/documentation/arkit
                   
+            var alert = UIAlertController()
             alert  = UIAlertController(title: "ARKit Error", message: message, preferredStyle: .alert)
                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                        switch action.style{
@@ -370,26 +371,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func startNetworkReachabilityObserver() {
         
-        alert  = UIAlertController(title: "Network Alert", message: "Error", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            switch action.style{
-            case .default:
-                print("default")
 
-            case .cancel:
-                print("cancel")
-
-            case .destructive:
-                print("destructive")
-
-            NSLog("dismissed UIAlert")
-
-            @unknown default:
-
-                NSLog("fail UIAlert")
-            }}))
-        
-     
         self.reachabilityManager?.startListening(onUpdatePerforming: {networkStatusListener in
             
             print("Network Status Changed:", networkStatusListener)
@@ -413,6 +395,8 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     @IBAction func clearCacheRemoveAllModels(_ sender: UIBarItem) {
+        
+        var alert = UIAlertController()
         
         alert  = UIAlertController(title: "Clear Cache",
                                    message: "Are you sure you would like to remove and reload all 3D models cached on your device?",
@@ -469,7 +453,28 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func presentAlert(message: String){
         
-        alert.dismiss(animated: true, completion: nil)
+        var alert = UIAlertController()
+        
+        alert  = UIAlertController(title: "Network Alert", message: "Error", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+
+            case .cancel:
+                print("cancel")
+
+            case .destructive:
+                print("destructive")
+
+            NSLog("dismissed UIAlert")
+
+            @unknown default:
+
+                NSLog("fail UIAlert")
+            }}))
+        
+        alert.dismiss(animated: false, completion: nil)
         alert.message = message
         self.present(alert, animated: true, completion: nil)
         
